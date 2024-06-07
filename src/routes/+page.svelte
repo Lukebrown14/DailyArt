@@ -1,34 +1,35 @@
 <script>
-    import { onMount } from 'svelte';
-    let artTile;
-    let artist;
-    let imgId;
-    let description;
-    
-    onMount(async () => {
-      const response = await fetch('https://api.artic.edu/api/v1/artworks')
-      const apiData = await response.json();
-      artTile = apiData.data[0].title;
-      artist = apiData.data[0].artist_title;
-      imgId = apiData.data[0].image_id;
-      description = apiData.data[0].description;
-      console.log(apiData.data[0])
-    });
+	import { onMount } from 'svelte';
+	let apiResult;
+	let index = 0;
+
+	function incrementIndex() {
+		index += 1;
+	}
+
+	onMount(async () => {
+		const dataResponse = await fetch('https://api.artic.edu/api/v1/artworks');
+		var apiData = await dataResponse.json();
+
+		apiData = apiData.data[index];
+		apiResult = {
+			title: apiData.title,
+			artist: apiData.artist,
+			description: apiData.description,
+			jpg: `https://www.artic.edu/iiif/2/${apiData.image_id}/full/843,/0/default.jpg`
+		};
+
+		console.log(apiResult.jpg);
+	});
 </script>
 
 <div>
-    {#if artTile} 
-      <p>Title: {artTile}</p>
-      <p>Artist: {artist}</p>
-
-      <a data-sveltekit-preload-data="tap" href="https://www.artic.edu/iiif/2/{imgId}/full/843,/0/default.jpg">
-        See Art Work
-      </a>
-
-    <p>{description} </p>
-
-    {:else}
-        <p>loading.....</p>
-    {/if}
+	{#if apiResult}
+		<h1>Daily Art</h1>
+		<h2>{apiResult.title}</h2>
+		<h2>{apiResult.artist}</h2>
+		<p>{apiResult.description}</p>
+		<img src={apiResult.jpg} alt="Dog image" />
+		<button on:click={incrementIndex}> Next </button>
+	{/if}
 </div>
-
