@@ -1,21 +1,14 @@
 import { writable, derived } from 'svelte/store';
 
-/** Store for your data. 
-This assumes the data you're pulling back will be an array.
-If it's going to be an object, default this to an empty object.
-**/
-export const apiData = writable([]);
-console.log(apiData)
-/** 
- * Data transformation.
-For our use case, we only care about the drink names, not the other information.
-Here, we'll create a derived store to hold the drink names.
-**/
-export const title = derived(apiData, ($apiData) => {
-  
-    console.log('-->', $apiData)
-  if ($apiData.data[0].title){
-    return $apiData.data[0].title;
-  }
-  return [];
+export const artStore = writable([]);
+
+export const artResult = derived(artStore, ($artStore) => {
+	return {
+		title: $artStore.title,
+		artist: $artStore.artist || $artStore.artist_title,
+		description: $artStore.description,
+		style: $artStore.style_title,
+		place: $artStore.place_of_origin,
+		jpg: `https://www.artic.edu/iiif/2/${$artStore.image_id}/full/843,/0/default.jpg`
+	};
 });
