@@ -5,15 +5,17 @@
 	onMount(async () => {
 		const dataResponse = await fetch('https://api.artic.edu/api/v1/artworks');
 		var apiData = await dataResponse.json();
-		console.log(apiData.data[0]);
-		artStore.set(apiData.data[0]);
+		console.log(apiData.data[1]);
+		artStore.set(apiData.data[1]);
 	});
 </script>
 
-<div class="bg-EerieBlack">
-	<h1>Daily Art</h1>
-
+<div>
 	{#if $artResult}
+		<div class=" mb-5 text-center text-slate-100 font-sans">
+			<h1 class=" text-xl">{$artResult.title || ''}</h1>
+			<h2 class="text-lg">{$artResult.artist || ''}</h2>
+		</div>
 		<div class="mt-5">
 			<img
 				class="mx-auto block w-3/4 shadow-md shadow-BlackOlive hover:scale-110 transition-all duration-700 ease-in-out"
@@ -24,17 +26,12 @@
 			<div class="mt-4">
 				<span class="badge badge-neutral mx-1">{$artResult.style}</span>
 				<span class="badge badge-neutral mx-1">{$artResult.place}</span>
+				<span class="badge badge-neutral mx-1">{$artResult.dateDisplayed}</span>
 			</div>
 		</div>
 
-		<!-- {#if apiResult.title}
-			<h2>{apiResult.title}</h2>
+		{#if $artResult.description}
+			<p>{@html $artResult.description}</p>
 		{/if}
-		{#if apiResult.artist}
-			<h2 class="title">{apiResult.artist}</h2>
-		{/if}
-		{#if apiResult.description}
-			<p>{@html apiResult.description}</p>
-		{/if} -->
 	{/if}
 </div>
