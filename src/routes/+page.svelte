@@ -50,7 +50,11 @@
 
 <!-- Description -->
 {#if $artResult.description}
-	<div class="pl-8 pt-6">
+	<div class="pl-8 pt-10">
 		<p>{@html $artResult.description}</p>
 	</div>
 {/if}
+
+<br />
+<br />
+<br />
