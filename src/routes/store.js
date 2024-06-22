@@ -9,7 +9,8 @@ export const artResult = derived(artStore, ($artStore) => {
 		description: $artStore.description,
 		style: $artStore.department_title || $artStore.classification_title,
 		place: $artStore.place_of_origin,
-		dateDisplayed: $artStore.date_display,
+		dateEnd: $artStore.date_end,
+		artworkType: $artStore.artwork_type_title,
 		jpg: `https://www.artic.edu/iiif/2/${$artStore.image_id}/full/843,/0/default.jpg`
 	};
 });
