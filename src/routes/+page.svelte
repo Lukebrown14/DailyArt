@@ -16,11 +16,6 @@
 	<p>ERROR</p>
 {/if}
 
-<!-- Art Image Rendering -->
-<div class="mx-auto block w-96 h-96 pt-10 hover:scale-125 transition-all duration-700 ease-in-out">
-	<img src={$artResult.jpg} alt={$artResult.title} class="object-cover max-w-full max-h-full" />
-</div>
-
 <!-- Stats -->
 <div class="pt-8 pl-8">
 	<div class="tooltip tooltip-bottom" data-tip="Style">
@@ -44,6 +39,13 @@
 <div class="text-left pl-8 text-slate-100 font-sans space-y-5 pt-6">
 	<h1 class="text-5xl">{$artResult.title || ''}</h1>
 	<h2 class="text-2xl">{$artResult.artist || ''}</h2>
+</div>
+
+<!-- Art Image Rendering -->
+<div
+	class="mx-auto block w-5/12 h-4/12 -m-1 hover:scale-110 transition-all duration-700 ease-in-out"
+>
+	<img src={$artResult.jpg} alt={$artResult.title} class="object-cover max-w-full max-h-full" />
 </div>
 
 <!-- Description -->
