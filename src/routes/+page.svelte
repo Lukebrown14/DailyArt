@@ -1,7 +1,7 @@
 <script>
 	import { artStore, artResult } from './store';
 
-	let index = 8;
+	let index = 2;
 
 	/** @type {import('./$types').PageLoad} */
 	export let data;
@@ -30,14 +30,7 @@
 		return 'phone-2';
 	};
 
-	console.log(
-		data.data[index],
-		'width',
-		data.data[index].dimensions_detail[0].width,
-		'height',
-		data.data[index].dimensions_detail[0].height,
-		`artboard ${getArtboardClass()} mx-auto block`
-	);
+	console.log(data.data[index]);
 </script>
 
 <div class="h-screen">
@@ -45,11 +38,18 @@
 		<p>ERROR</p>
 	{/if}
 
-	<!-- Art Image Rendering -->
-
-	<div class="pt-8">
-		<div class={`artboard ${getArtboardClass()} mx-auto block`}>
+	<div class="space-y-56">
+		<!-- Art Image Rendering -->
+		<div
+			class={`artboard ${getArtboardClass()} mt-20 mx-auto block hover:scale-110 transition-all duration-700 ease-in-out`}
+		>
 			<img src={$artResult.jpg} alt={$artResult.title} />
+		</div>
+
+		<!-- Title & artist -->
+		<div class="text-center text-slate-100 font-sans space-y-5 pt-20">
+			<h1 class="text-5xl">{$artResult.title || ''}</h1>
+			<h2 class="text-2xl">{$artResult.artist || ''}</h2>
 		</div>
 	</div>
 
@@ -73,11 +73,6 @@
 		{#if $artResult.description}
 			<p>{@html $artResult.description}</p>
 		{/if} -->
-</div>
-
-<div class="text-center text-slate-100 font-sans pt-10 space-y-5">
-	<h1 class=" text-5xl">{$artResult.title || ''}</h1>
-	<h2 class="text-2xl">{$artResult.artist || ''}</h2>
 </div>
 
 <!-- <div class="mt-10">
