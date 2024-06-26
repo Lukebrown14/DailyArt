@@ -7,8 +7,6 @@
 	/** @type {import('./$types').PageLoad} */
 	export let data;
 	artStore.set(data.data[index]);
-
-	console.log(data.data[index]);
 </script>
 
 <!--!Needs doing! -->
